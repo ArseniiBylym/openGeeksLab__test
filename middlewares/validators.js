@@ -16,3 +16,12 @@ exports.articleValidator = [
     body('category')
         .not().isEmpty().withMessage('Category is required')
 ]
+
+exports.recipeValidator = [
+    body('title')
+        .not().isEmpty().withMessage('Title is required'),
+    body('text')
+        .not().isEmpty().withMessage('Text is required'),
+    body('category')
+        .not().isEmpty().withMessage('Category is required')
+]

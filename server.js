@@ -12,6 +12,7 @@ const app = express();
 
 const categoryRouter = require('./routes/category.route');
 const articleRouter = require('./routes/article.route');
+const recipeRouter = require('./routes/recipe.route');
 
 // Middlewares
 app.use(helmet());
@@ -21,6 +22,7 @@ app.use(cors());
 // Main routes
 app.use('/api/categories', categoryRouter);
 app.use('/api/articles', articleRouter);
+app.use('/api/recipes', recipeRouter);
 
 // Error handling
 app.use((err, req, res, next) => {

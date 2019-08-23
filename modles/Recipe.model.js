@@ -8,4 +8,4 @@ const recipeChema = new Schema({
     timestamps: true
 })
 
-module.exports = model('Article', recipeChema)
+module.exports = model('Recipe', recipeChema)
