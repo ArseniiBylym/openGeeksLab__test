@@ -1,5 +1,6 @@
 const Category = require('../modles/Category.model');
 const {validationResult} = require('express-validator');
+const getParents = require('../utils/helpers/getParents');
 
 exports.getAll = async (req, res, next) => {
     try {
@@ -11,12 +12,18 @@ exports.getAll = async (req, res, next) => {
 }
 
 exports.getItem = async (req, res, next) => {
+    const {parents} = req.query;
     const {id} = req.params;
+
     try {
         const category = await Category.findById(id).exec();
         if (!category) { 
             return res.status(404).json('Category not found')
         }
+        if (parents) {
+            const list = await getParents({model: Category, doc: category});
+            return res.status(200).json(list);
+        } 
         return res.status(200).json(category);
     } catch (error) {
         return res.status(404).json('Category not found')
