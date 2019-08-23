@@ -10,17 +10,18 @@ const MONGO_DB_URI = process.env.MONGO_DB_URI;
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+const categoryRouter = require('./routes/category.route');
+
 // Middlewares
 app.use(helmet());
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Main routes
-
+app.use('/api/category', categoryRouter);
 
 // Error handling
 app.use((err, req, res, next) => {
-    console.log(red(err));
     const {statusCode = 500, message, errors} = err;
     return res.status(statusCode).json({message, errors});
 });
@@ -40,6 +41,5 @@ mongoose
         console.log(`Server listen on port ${PORT}`);
     })
     .catch(error => {
-        console.log('Connection error')
-        console.log(error);
+        console.log('Connection error', error)
     });
