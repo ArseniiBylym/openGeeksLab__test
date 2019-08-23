@@ -8,7 +8,7 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam (Query string) {String} category Category id (optional)
+ * @apiParam (Query string) {String} [category] Category id 
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
@@ -58,7 +58,7 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam (Query string) {Boolean} getParents Get array of parent categories(optional)
+ * @apiParam (Query string) {Boolean} [getParents] Get array of parent categories
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
@@ -116,9 +116,9 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam {String} title Recipe title (required)
- * @apiParam {String} text Recipe text (required)
- * @apiParam {String} category Recipe category id (required)
+ * @apiParam {String} title Recipe title 
+ * @apiParam {String} text Recipe text 
+ * @apiParam {String} category Recipe category id 
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
@@ -168,9 +168,9 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam {String} title Recipe title (required)
- * @apiParam {String} text Recipe text (required)
- * @apiParam {String} category Recipe category id (required)
+ * @apiParam {String} title Recipe title 
+ * @apiParam {String} text Recipe text 
+ * @apiParam {String} category Recipe category id 
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title

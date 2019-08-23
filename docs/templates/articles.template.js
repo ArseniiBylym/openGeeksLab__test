@@ -8,7 +8,7 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam (Query string) {String} category Category id (optional)
+ * @apiParam (Query string) {String} [category] Category id 
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title
@@ -61,7 +61,7 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam (Query string) {Boolean} getParents Get array of parent categories(optional)
+ * @apiParam (Query string) {Boolean} [getParents] Get array of parent categories
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title
@@ -121,10 +121,10 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam {String} title Article title (required)
- * @apiParam {String} subTitle Article subtitle (required)
- * @apiParam {String} text Article text (required)
- * @apiParam {String} category Article category id (required)
+ * @apiParam {String} title Article title 
+ * @apiParam {String} subTitle Article subtitle 
+ * @apiParam {String} text Article text 
+ * @apiParam {String} category Article category id 
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title
@@ -176,10 +176,10 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam {String} title Article title (required)
- * @apiParam {String} subTitle Article subtitle (required)
- * @apiParam {String} text Article text (required)
- * @apiParam {String} category Article category id (required)
+ * @apiParam {String} title Article title 
+ * @apiParam {String} subTitle Article subtitle 
+ * @apiParam {String} text Article text 
+ * @apiParam {String} category Article category id 
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title

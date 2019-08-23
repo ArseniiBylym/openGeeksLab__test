@@ -52,7 +52,7 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam (Query string) {Boolean} getParents Get array of parent categories(optional)
+ * @apiParam (Query string) {Boolean} [getParents] Get array of parent categories
  * 
  * @apiSuccess {String} _id Category id
  * @apiSuccess {String} name Category name
@@ -108,7 +108,7 @@
  * @apiHeader {String} Content-Type application/json
  * 
  * @apiParam {String} name Category name (required)
- * @apiParam {String} parent Parent category id (optional)
+ * @apiParam {String} [parent] Parent category id 
  * 
  * @apiSuccess {String} _id Category id
  * @apiSuccess {String} name Category name
@@ -146,8 +146,8 @@
  * 
  * @apiHeader {String} Content-Type application/json
  * 
- * @apiParam {String} name(required) Category name
- * @apiParam {String} parent(optional) Parent category id
+ * @apiParam {String} name Category name
+ * @apiParam {String} [parent] Parent category id
  * 
  * @apiSuccess {String} _id Category id
  * @apiSuccess {String} name Category name
