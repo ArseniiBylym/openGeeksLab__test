@@ -16,7 +16,7 @@ const recipeRouter = require('./routes/recipe.route');
 
 // Middlewares
 app.use(helmet());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
 
 // Main routes
