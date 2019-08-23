@@ -32,8 +32,7 @@ exports.getItem = async (req, res, next) => {
         } 
         return res.status(200).json(recipe);
     } catch (error) {
-        console.log(error)
-        return res.status(404).json('Recipe not found')
+        next(error)
     }
 }
 

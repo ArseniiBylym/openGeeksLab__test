@@ -21,12 +21,12 @@ exports.getItem = async (req, res, next) => {
             return res.status(404).json('Category not found')
         }
         if (getParents) {
-            const list = await getParentCategories({model: Category, doc: category});
+            const list = await getParentCategories(category);
             return res.status(200).json(list);
         } 
         return res.status(200).json(category);
     } catch (error) {
-        return res.status(404).json('Category not found')
+       next(error)
     }
 }
 
