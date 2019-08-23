@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 const categoryRouter = require('./routes/category.route');
+const articleRouter = require('./routes/article.route');
 
 // Middlewares
 app.use(helmet());
@@ -18,7 +19,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // Main routes
-app.use('/api/category', categoryRouter);
+app.use('/api/categories', categoryRouter);
+app.use('/api/articles', articleRouter);
 
 // Error handling
 app.use((err, req, res, next) => {

@@ -1,25 +1,25 @@
-const Category = require('../modles/Category.model');
+const Article = require('../modles/Article.model');
 const {validationResult} = require('express-validator');
 
 exports.getAll = async (req, res, next) => {
     try {
-        const categories = await Category.find().exec();
-        return res.status(200).json(categories);
+        const articles = await Article.find().exec();
+        return res.status(200).json(articles);
     } catch (error) {
-        return res.status(404).json('Categories not found')
+        return res.status(404).json('Articles not found')
     }
 }
 
 exports.getItem = async (req, res, next) => {
     const {id} = req.params;
     try {
-        const category = await Category.findById(id).exec();
-        if (!category) { 
-            return res.status(404).json('Category not found')
+        const article = await Article.findById(id).exec();
+        if (!article) {
+            return res.status(404).json('Article not found')
         }
-        return res.status(200).json(category);
+        return res.status(200).json(article);
     } catch (error) {
-        return res.status(404).json('Category not found')
+        return res.status(404).json('Article not found')
     }
 }
 
@@ -29,8 +29,8 @@ exports.add = async (req, res, next) => {
         return res.status(400).json(validationErrors.array());
     }
     try {
-        const category = await new Category({...req.body}).save();
-        return res.status(201).json(category);
+        const article = await new Article({...req.body}).save();
+        return res.status(201).json(article);
     } catch (error) {
         next(error)
     }
@@ -43,12 +43,12 @@ exports.update = async (req, res, next) => {
     }
     try {
         const {id} = req.params;
-        const category = await Category.findOneAndUpdate(
+        const article = await Article.findOneAndUpdate(
             {_id: id}, 
             {$set: {...req.body}},
             {new: true}
-        );
-        return res.status(201).json(category);
+        ).exec();
+        return res.status(201).json(article);
     } catch (error) {
         next(error)
     }
@@ -57,7 +57,7 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         const {id} = req.params;
-        await Category.findByIdAndDelete(id);
+        await Article.findByIdAndDelete(id).exec();
         return res.status(201).json(id);
     } catch (error) {
         next(error)
