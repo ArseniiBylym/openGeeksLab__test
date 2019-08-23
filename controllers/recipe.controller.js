@@ -2,8 +2,10 @@ const Recipe = require('../modles/Recipe.model');
 const {validationResult} = require('express-validator');
 
 exports.getAll = async (req, res, next) => {
+    const {category} = req.query;
+    const searchParam = category ? {category} : null;
     try {
-        const recipes = await Recipe.find().exec();
+        const recipes = await Recipe.find(searchParam).exec();
         return res.status(200).json(recipes);
     } catch (error) {
         return res.status(404).json('Recipes not found')

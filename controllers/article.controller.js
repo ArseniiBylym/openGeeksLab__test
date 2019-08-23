@@ -2,8 +2,10 @@ const Article = require('../modles/Article.model');
 const {validationResult} = require('express-validator');
 
 exports.getAll = async (req, res, next) => {
+    const {category} = req.query;
+    const searchParam = category ? {category} : null;
     try {
-        const articles = await Article.find().exec();
+        articles = await Article.find(searchParam).exec();
         return res.status(200).json(articles);
     } catch (error) {
         return res.status(404).json('Articles not found')
