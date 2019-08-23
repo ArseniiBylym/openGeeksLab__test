@@ -1,5 +1,7 @@
 const Recipe = require('../modles/Recipe.model');
+const Category = require('../modles/Category.model');
 const {validationResult} = require('express-validator');
+const getParentCategories = require('../utils/helpers/getParentCategories');
 
 exports.getAll = async (req, res, next) => {
     const {category} = req.query;
@@ -13,14 +15,24 @@ exports.getAll = async (req, res, next) => {
 }
 
 exports.getItem = async (req, res, next) => {
+    const {getParents} = req.query;
     const {id} = req.params;
     try {
         const recipe = await Recipe.findById(id).exec();
         if (!recipe) {
             return res.status(404).json('Recipe not found')
         }
+        if (getParents) {
+            const category = await Category.findById(recipe.category).exec();
+            if (!category) {
+                return res.status(404).json('Categories not found')
+            }
+            const list = await getParentCategories(category);
+            return res.status(200).json(list);
+        } 
         return res.status(200).json(recipe);
     } catch (error) {
+        console.log(error)
         return res.status(404).json('Recipe not found')
     }
 }
