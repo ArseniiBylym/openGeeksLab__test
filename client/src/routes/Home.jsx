@@ -7,7 +7,6 @@ import {CategoriesTree} from '../components/shared/';
 import styles from './Home.module.scss';
 
 const Home = props => {
-
     return (
         <div className={styles.root}>
             <div className={styles.image} />

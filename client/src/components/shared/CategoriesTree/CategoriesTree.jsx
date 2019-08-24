@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import {Spinner} from '../Spinner/Spinner';
 import Tree from './Tree';
-import CreateCategoryModal from '../../modals/CreateCategoryModal';
+import {CategoryModal} from '../../modals';
 
 export const CategoriesTree = props => {
     const categoriesArray = useStoreState(state => state.categories.list);
@@ -14,23 +14,27 @@ export const CategoriesTree = props => {
     const getCategoriesTree = () => {
         return (
             <div className={styles.tree__content}>
-                {categoriesArray.length ? (
-                    <Tree tree={categoriesTree}/>
-                ) : (
-                    <Typography variant='h6' gutterBottom>Category list is empty now</Typography> 
-                )}
-                <CreateCategoryModal />
-            </div> 
-        )
-    }
+                <div className={styles.tree__content__body}>
+                    {categoriesArray.length ? (
+                        <Tree tree={categoriesTree} />
+                    ) : (
+                        <Typography variant="h6" gutterBottom>
+                            Category list is empty now
+                        </Typography>
+                    )}
+                </div>
+                <CategoryModal />
+            </div>
+        );
+    };
 
     return (
         <div className={styles.root}>
-            <Grid container justify="center" >
-                <Typography color='primary' variant="h6">Shoose a category</Typography>
-                <div className={styles.tree}>
-                    {categoriesArray ? getCategoriesTree() : <Spinner />}
-                </div>
+            <Grid container justify="center">
+                <Typography color="primary" variant="h6">
+                    Shoose a category
+                </Typography>
+                <div className={styles.tree}>{categoriesArray ? getCategoriesTree() : <Spinner />}</div>
             </Grid>
         </div>
     );

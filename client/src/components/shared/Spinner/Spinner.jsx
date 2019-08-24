@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import styles from './Spinner.module.scss';
 
 export const Spinner = ({bgColor}) => {
-    const background = bgColor || '#efefefa4';
+    const background = bgColor || '#fafafa';
 
     return (
         <div className={styles.root} style={{backgroundColor: background}}>

@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 import Category from '../components/categories/Category';
 import { CategoriesTree, MainHeader } from '../components/shared';
-
-import Grid from '@material-ui/core/Grid';
 import styles from './Categories.module.scss';
 
 const Categories = props => {
