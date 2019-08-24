@@ -1,0 +1,18 @@
+.root {
+    
+    .image {
+        min-height: 350px;
+        max-width: 800px;
+        margin: auto;
+        background: url('../assets/images/home.jpg') top center / cover no-repeat;
+    }
+    .content {
+        padding: 2rem;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        a {
+            text-decoration: none;
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.root {
+    font-size: 2rem;
+    .link {
+        text-decoration: none;
+        color: inherit;
+    }
+    .label {
+        text-transform: capitalize;
+        color: #3f51b5
+    }
+}
