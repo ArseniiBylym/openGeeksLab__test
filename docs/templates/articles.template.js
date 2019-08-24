@@ -14,6 +14,7 @@
  * @apiSuccess {String} title Article title
  * @apiSuccess {String} subTitle Article subtitle
  * @apiSuccess {String} text Article text
+ * @apiSuccess {String} [imageUrl] Article image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Article create date
  * @apiSuccess {String} updatedAt Article update date
@@ -27,6 +28,7 @@
  *       "title": "Article 1",
  *       "subTitle": "subtitle",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -67,6 +69,7 @@
  * @apiSuccess {String} title Article title
  * @apiSuccess {String} subTitle Article subtitle
  * @apiSuccess {String} text Article text
+ * @apiSuccess {String} [imageUrl] Article image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Article create date
  * @apiSuccess {String} updatedAt Article update date
@@ -79,6 +82,7 @@
  *       "title": "Article 1",
  *       "subTitle": "subtitle",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -125,11 +129,13 @@
  * @apiParam {String} subTitle Article subtitle 
  * @apiParam {String} text Article text 
  * @apiParam {String} category Article category id 
+ * @apiParam {String} [imageUrl] Article image 
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title
  * @apiSuccess {String} subTitle Article subtitle
  * @apiSuccess {String} text Article text
+ * @apiSuccess {String} [imageUrl] Article image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Article create date
  * @apiSuccess {String} updatedAt Article update date
@@ -142,6 +148,7 @@
  *       "title": "Article 1",
  *       "subTitle": "subtitle",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -180,11 +187,13 @@
  * @apiParam {String} subTitle Article subtitle 
  * @apiParam {String} text Article text 
  * @apiParam {String} category Article category id 
+ * @apiParam {String} [imageUrl] Article image 
  * 
  * @apiSuccess {String} _id Article id
  * @apiSuccess {String} title Article title
  * @apiSuccess {String} subTitle Article subtitle
  * @apiSuccess {String} text Article text
+ * @apiSuccess {String} [imageUrl] Article image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Article create date
  * @apiSuccess {String} updatedAt Article update date
@@ -196,6 +205,7 @@
  *       "_id": "5d5fbcee5e375b1db0d11138",
  *       "title": "Article 1",
  *       "subTitle": "subtitle",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "text": "lorem",
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",

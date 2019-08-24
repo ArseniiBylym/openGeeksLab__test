@@ -13,6 +13,7 @@
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
  * @apiSuccess {String} text Recipe text
+ * @apiSuccess {String} [imageUrl] Recipe image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Recipe create date
  * @apiSuccess {String} updatedAt Recipe update date
@@ -25,6 +26,7 @@
  *       "_id": "5d5fbcee5e375b1db0d11138",
  *       "title": "Recipe 1",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -63,6 +65,7 @@
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
  * @apiSuccess {String} text Recipe text
+ * @apiSuccess {String} [imageUrl] Recipe image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Recipe create date
  * @apiSuccess {String} updatedAt Recipe update date
@@ -74,6 +77,7 @@
  *       "_id": "5d5fbcee5e375b1db0d11138",
  *       "title": "Recipe 1",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -119,10 +123,12 @@
  * @apiParam {String} title Recipe title 
  * @apiParam {String} text Recipe text 
  * @apiParam {String} category Recipe category id 
+ * @apiParam {String} [imageUrl] Recipe image 
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
  * @apiSuccess {String} text Recipe text
+ * @apiSuccess {String} [imageUrl] Recipe image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Recipe create date
  * @apiSuccess {String} updatedAt Recipe update date
@@ -134,6 +140,7 @@
  *       "_id": "5d5fbcee5e375b1db0d11138",
  *       "title": "Recipe 1",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
@@ -171,10 +178,12 @@
  * @apiParam {String} title Recipe title 
  * @apiParam {String} text Recipe text 
  * @apiParam {String} category Recipe category id 
+ * @apiParam {String} [imageUrl] Recipe image 
  * 
  * @apiSuccess {String} _id Recipe id
  * @apiSuccess {String} title Recipe title
  * @apiSuccess {String} text Recipe text
+ * @apiSuccess {String} [imageUrl] Recipe image
  * @apiSuccess {String} category Category id
  * @apiSuccess {String} createdAt Recipe create date
  * @apiSuccess {String} updatedAt Recipe update date
@@ -186,6 +195,7 @@
  *       "_id": "5d5fbcee5e375b1db0d11138",
  *       "title": "Recipe 1",
  *       "text": "lorem",
+ *       "imageUrl": "http://pinterest.com/image.jpg"
  *       "category": "5d5fa99f61248607380a15a8",
  *       "createdAt": "2019-08-23T10:16:14.046Z",
  *       "updatedAt": "2019-08-23T10:16:14.046Z",
