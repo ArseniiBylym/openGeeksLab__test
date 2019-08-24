@@ -13,7 +13,7 @@ const Tree = ({tree}) => {
             return null;
         } 
         return list.map(item => (
-            <NavLink to={`/categories/${item._id}`} className={styles.link}>
+            <NavLink to={`/categories/${item._id}`} className={styles.link} key={item._id}>
                 <TreeItem nodeId={item._id} label={item.name} classes={{label: styles.label}} key={item._id}>
                     {createMenuItems(item.children)}
                 </TreeItem>
