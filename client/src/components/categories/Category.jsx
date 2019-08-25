@@ -45,6 +45,10 @@ const Category = props => {
         setArticles((articles) => [...articles, newArticle])
     }
 
+    const addNewRecipe = (newRecipe) => {
+        setRecipes((recipes) => [...recipes, newRecipe])
+    }
+
     const getArticles = () => {
         if (!articles) {
             return <Spinner />;
@@ -83,7 +87,7 @@ const Category = props => {
                     <Typography className={styles.empty} variant="h6" align="center">
                         Recipes list is empty now
                     </Typography>
-                    <RecipeModal category={_id}/>
+                    <RecipeModal category={_id} add={addNewRecipe}/>
                 </>
             );
         }
@@ -96,7 +100,7 @@ const Category = props => {
                         </Grid>
                     ))}
                 </Grid>
-                <RecipeModal category={_id}/>
+                <RecipeModal category={_id} add={addNewRecipe}/>
             </>
         );
     };

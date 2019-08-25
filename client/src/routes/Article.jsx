@@ -10,6 +10,7 @@ import defaultImage from '../assets/images/article.jpg';
 const Article = props => {
     const {id} = props.match.params;
     const [article, setArticle] = useState(null);
+    
     useEffect(() => {
         fetchArticle();
     }, [id]);
