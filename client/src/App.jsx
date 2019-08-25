@@ -12,11 +12,13 @@ const Recipe = lazy(() => import('./routes/Recipe'));
 
 function App() {
     const fetchCategories = useStoreActions(state => state.categories.fetchCategories);
+    const categories = useStoreState(state => state.categories.list)
 
     useEffect(() => {
-        // fetchCategories();
+        fetchCategories();
     }, [])
 
+    if (!categories) return <Spinner />
     return (
         <div>
             <Router>

@@ -10,6 +10,11 @@ import {CategoryModal} from '../../modals';
 export const CategoriesTree = props => {
     const categoriesArray = useStoreState(state => state.categories.list);
     const categoriesTree = useStoreState(state => state.categories.tree);
+    const addCategory = useStoreActions(state => state.categories.addCategory)
+
+    const onAddCategoryHandler = category => {
+        addCategory(category)
+    }
 
     const getCategoriesTree = () => {
         return (
@@ -23,7 +28,7 @@ export const CategoriesTree = props => {
                         </Typography>
                     )}
                 </div>
-                <CategoryModal />
+                <CategoryModal list={categoriesArray} add={onAddCategoryHandler}/>
             </div>
         );
     };

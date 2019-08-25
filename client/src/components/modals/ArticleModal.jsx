@@ -79,7 +79,6 @@ export const ArticleModal = ({article, category, add, update}) => {
                 onClose={onCloseHandler}
                 aria-labelledby="form-dialog-title"
                 className={styles.dialog}
-                classes={{paper: styles.paper}}
             >
                 <form onSubmit={onSubmitHandler}>
                     {sending && <Spinner bgColor="#efefefa4" />}

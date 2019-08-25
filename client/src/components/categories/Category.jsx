@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {withRouter} from 'react-router'
 import {useStoreState, useStoreActions} from 'easy-peasy';
 import styles from './Category.module.scss';
 import {BreadcrumbsContainer} from '../shared';
@@ -19,8 +20,10 @@ const Category = props => {
     const [articles, setArticles] = useState(null);
     const [recipes, setRecipes] = useState(null);
     const [tab, setTab] = useState(0);
-    const {name, parent, _id} = useStoreState(state => state.categories.list.find(item => item._id === id));
     const categories = useStoreState(state => state.categories.list.map(({name, _id, parent}) => ({name, _id, parent})))
+    const category = useStoreState(state => state.categories.list.find(item => item._id === id));
+    const updateCategory = useStoreActions(state => state.categories.updateCategory)
+    const deleteCategory = useStoreActions(state => state.categories.deleteCategory)
 
     useEffect(() => {
         fetchArticles();
@@ -38,7 +41,17 @@ const Category = props => {
     };
 
     const onDeleteHandler = async () => {
-        
+        try {
+            await fetchApi.delete(`${URL_PATH.CATEGORIES}/${id}`);
+            deleteCategory(category);
+            if (category.parent) {
+                props.history.push(`/categories/${category.parent}`)
+            } else {
+                props.history.push('/')
+            }
+        } catch (error) {
+            console.log(error);
+        }
     } 
 
     const addNewArticle = (newArticle) => {
@@ -48,6 +61,10 @@ const Category = props => {
     const addNewRecipe = (newRecipe) => {
         setRecipes((recipes) => [...recipes, newRecipe])
     }
+
+    const onUpdateCategoryHandler = (updatedCategory) => {
+        updateCategory(updatedCategory);
+    } 
 
     const getArticles = () => {
         if (!articles) {
@@ -59,7 +76,7 @@ const Category = props => {
                     <Typography className={styles.empty} variant="h6" align="center">
                         Articles list is empty now
                     </Typography>
-                    <ArticleModal category={_id} add={addNewArticle}/>
+                    <ArticleModal category={category._id} add={addNewArticle}/>
                 </>
             );
         }
@@ -67,12 +84,12 @@ const Category = props => {
             <>
                 <Grid container style={{padding: '1rem'}} spacing={2}>
                     {articles.map(item => (
-                        <Grid item xs={12} sm={6} md={4}>
+                        <Grid item xs={12} sm={6} md={4} key={item._id}>
                             <ArticleCard key={item._id} {...item} />
                         </Grid>
                     ))}
                 </Grid>
-                <ArticleModal category={_id} add={addNewArticle}/>
+                <ArticleModal category={category._id} add={addNewArticle}/>
             </>
         );
     };
@@ -87,7 +104,7 @@ const Category = props => {
                     <Typography className={styles.empty} variant="h6" align="center">
                         Recipes list is empty now
                     </Typography>
-                    <RecipeModal category={_id} add={addNewRecipe}/>
+                    <RecipeModal category={category._id} add={addNewRecipe}/>
                 </>
             );
         }
@@ -95,25 +112,26 @@ const Category = props => {
             <>
                 <Grid container style={{padding: '1rem'}} spacing={2}>
                     {recipes.map(item => (
-                        <Grid item xs={12} sm={6} md={4}>
+                        <Grid item xs={12} sm={6} md={4} key={item._id}>
                             <RecipeCard key={item._id} {...item} />
                         </Grid>
                     ))}
                 </Grid>
-                <RecipeModal category={_id} add={addNewRecipe}/>
+                <RecipeModal category={category._id} add={addNewRecipe}/>
             </>
         );
     };
 
+    if (!categories || !category) return <Spinner />
     return (
         <div className={styles.root}>
             <BreadcrumbsContainer type="categories" id={id} />
             <div className={styles.header}>
                 <Typography variant="h3" className={styles.header__name}>
-                    {name}
+                    {category.name}
                 </Typography>
                 <div className={styles.controls}>
-                    <CategoryModal id={_id} categories={categories}/>
+                    <CategoryModal category={category} update={onUpdateCategoryHandler}/>
                     <Button className={styles.controls__delete} color='secondary' variant='contained' onClick={onDeleteHandler}>Delete</Button>
                 </div>
             </div>
@@ -151,4 +169,4 @@ const Category = props => {
     );
 };
 
-export default Category;
+export default withRouter(Category);

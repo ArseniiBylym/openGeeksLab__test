@@ -24,7 +24,7 @@ export const BreadcrumbsContainer = ({type, id}) => {
         return (
             <Breadcrumbs aria-label="breadcrumb">\
                 {parents.map(item => (
-                    <Link to={`/categories/${item._id}`}>
+                    <Link to={`/categories/${item._id}`} key={item._id}>
                         <Typography variant='h6'>{item.name}</Typography>
                     </Link>
                 ))}
