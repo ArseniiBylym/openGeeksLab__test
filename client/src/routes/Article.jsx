@@ -20,7 +20,16 @@ const Article = props => {
     };
     
     const onDeleteHandler = async () => {
+        try {
+            await fetchApi.delete(`${URL_PATH.ARTICLES}/${article._id}`);
+            props.history.push(`/categories/${article.category}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
+    const onUpdateHandler = (updatedArticle) => {
+        setArticle(updatedArticle);
     }
 
     if (!article) return <Spinner />;
@@ -39,7 +48,7 @@ const Article = props => {
                     {article.text}
                 </Typography>
                 <div className={styles.controls}>
-                    <ArticleModal id={article._id} />
+                    <ArticleModal article={article} category={article.category} update={onUpdateHandler}/>
                     <Button color="secondary" variant="contained" onClick={onDeleteHandler}>
                         Delete
                     </Button>

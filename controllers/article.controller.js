@@ -39,12 +39,15 @@ exports.getItem = async (req, res, next) => {
 exports.add = async (req, res, next) => {
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
+        console.log(req.body)
+        console.log('error validation')
         return res.status(400).json(validationErrors.array());
     }
     try {
         const article = await new Article({...req.body}).save();
         return res.status(201).json(article);
     } catch (error) {
+        console.log(error)
         next(error)
     }
 }

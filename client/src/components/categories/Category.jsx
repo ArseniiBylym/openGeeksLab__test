@@ -20,6 +20,7 @@ const Category = props => {
     const [recipes, setRecipes] = useState(null);
     const [tab, setTab] = useState(0);
     const {name, parent, _id} = useStoreState(state => state.categories.list.find(item => item._id === id));
+    const categories = useStoreState(state => state.categories.list.map(({name, _id, parent}) => ({name, _id, parent})))
 
     useEffect(() => {
         fetchArticles();
@@ -40,6 +41,10 @@ const Category = props => {
         
     } 
 
+    const addNewArticle = (newArticle) => {
+        setArticles((articles) => [...articles, newArticle])
+    }
+
     const getArticles = () => {
         if (!articles) {
             return <Spinner />;
@@ -50,20 +55,20 @@ const Category = props => {
                     <Typography className={styles.empty} variant="h6" align="center">
                         Articles list is empty now
                     </Typography>
-                    <ArticleModal />
+                    <ArticleModal category={_id} add={addNewArticle}/>
                 </>
             );
         }
         return (
             <>
-                <Grid container style={{padding: '1rem'}}>
+                <Grid container style={{padding: '1rem'}} spacing={2}>
                     {articles.map(item => (
                         <Grid item xs={12} sm={6} md={4}>
                             <ArticleCard key={item._id} {...item} />
                         </Grid>
                     ))}
                 </Grid>
-                <ArticleModal />
+                <ArticleModal category={_id} add={addNewArticle}/>
             </>
         );
     };
@@ -78,20 +83,20 @@ const Category = props => {
                     <Typography className={styles.empty} variant="h6" align="center">
                         Recipes list is empty now
                     </Typography>
-                    <RecipeModal />
+                    <RecipeModal category={_id}/>
                 </>
             );
         }
         return (
             <>
-                <Grid container style={{padding: '1rem'}}>
+                <Grid container style={{padding: '1rem'}} spacing={2}>
                     {recipes.map(item => (
                         <Grid item xs={12} sm={6} md={4}>
                             <RecipeCard key={item._id} {...item} />
                         </Grid>
                     ))}
                 </Grid>
-                <RecipeModal />
+                <RecipeModal category={_id}/>
             </>
         );
     };
@@ -104,7 +109,7 @@ const Category = props => {
                     {name}
                 </Typography>
                 <div className={styles.controls}>
-                    <CategoryModal id={_id} />
+                    <CategoryModal id={_id} categories={categories}/>
                     <Button className={styles.controls__delete} color='secondary' variant='contained' onClick={onDeleteHandler}>Delete</Button>
                 </div>
             </div>

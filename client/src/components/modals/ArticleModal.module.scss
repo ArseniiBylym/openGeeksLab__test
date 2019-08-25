@@ -2,4 +2,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    .dialog {
+        width: 400px;
+        padding: 2rem;
+        position: relative;
+    }
 }
+        .paper {
+            width: 800px;
+        }
