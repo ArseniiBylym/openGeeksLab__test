@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,9 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+
+import {getShortString} from './../../utils/helpers';
 import styles from './RecipeCard.module.scss';
-import defaultImage from '../../assets/images/recipe.jpg'
-import { getShortString } from './../../utils/helpers';
+import defaultImage from '../../assets/images/recipe.jpg';
 
 const RecipeCard = props => {
     const {title, text, _id, imageUrl} = props;
@@ -17,11 +18,7 @@ const RecipeCard = props => {
     return (
         <Card className={styles.root}>
             <CardActionArea>
-                <CardMedia
-                    className={styles.media}
-                    image={imageUrl || defaultImage}
-                    title={title}
-                />
+                <CardMedia className={styles.media} image={imageUrl || defaultImage} title={title} />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {title}
@@ -33,9 +30,7 @@ const RecipeCard = props => {
             </CardActionArea>
             <CardActions>
                 <Button size="small" color="primary">
-                    <Link to={`/recipes/${_id}`}>
-                        Read more
-                    </Link>
+                    <Link to={`/recipes/${_id}`}>Read more</Link>
                 </Button>
             </CardActions>
         </Card>

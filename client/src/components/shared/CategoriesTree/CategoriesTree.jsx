@@ -1,20 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import styles from './CategoriesTree.module.scss';
+import React from 'react';
+import {useStoreState, useStoreActions} from 'easy-peasy';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import {useStoreState, useStoreActions} from 'easy-peasy';
+
 import {Spinner} from '../Spinner/Spinner';
 import Tree from './Tree';
 import {CategoryModal} from '../../modals';
+import styles from './CategoriesTree.module.scss';
 
 export const CategoriesTree = props => {
     const categoriesArray = useStoreState(state => state.categories.list);
     const categoriesTree = useStoreState(state => state.categories.tree);
-    const addCategory = useStoreActions(state => state.categories.addCategory)
+    const addCategory = useStoreActions(state => state.categories.addCategory);
 
     const onAddCategoryHandler = category => {
-        addCategory(category)
-    }
+        addCategory(category);
+    };
 
     const getCategoriesTree = () => {
         return (
@@ -28,7 +29,7 @@ export const CategoriesTree = props => {
                         </Typography>
                     )}
                 </div>
-                <CategoryModal list={categoriesArray} add={onAddCategoryHandler}/>
+                <CategoryModal list={categoriesArray} add={onAddCategoryHandler} />
             </div>
         );
     };

@@ -1,12 +1,9 @@
-
 import React from 'react';
 import {ThemeProvider} from '@material-ui/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-const theme = createMuiTheme({
-    
-})
+const theme = createMuiTheme({});
 
 export const MaterialThemeProvider = props => {
     return (

@@ -4,87 +4,78 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import styles from './ArticleModal.module.scss';
-import {fetchApi, URL_PATH} from '../../api';
 import Typography from '@material-ui/core/Typography';
-import {Spinner} from '../shared';
 
-export const ArticleModal = ({article, category, add, update}) => {
+import {fetchApi, URL_PATH} from '../../../api';
+import {Spinner} from '../../shared';
+import styles from './RecipeModal.module.scss';
+
+export const RecipeModal = ({recipe, category, add, update}) => {
     const [open, setOpen] = useState(false);
     const [title, setTitle] = useState('');
-    const [subTitle, setSubTitle] = useState('');
     const [text, setText] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [sending, setSending] = useState(false);
 
     useEffect(() => {
-        if (article) {
-            const {title, subTitle, text, imageUrl} = article;
-            setTitle(title);
-            setSubTitle(subTitle);
-            setText(text);
-            setImageUrl(imageUrl || '');
-        }
-    }, [])
+        isEditMode() && seedForm();
+    }, []);
 
-    const isEditMode = () => !!article;
+    const isEditMode = () => !!recipe;
 
     const isDisabled = () => {
-        return !title || !subTitle || !text || sending;
+        return !title || !text || sending;
     };
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {title, subTitle, text, category, imageUrl: imageUrl || null};
+        const body = {title, text, category, imageUrl: imageUrl || null};
         setSending(true);
         let response;
         if (isEditMode()) {
-            response = await fetchApi.put(`${URL_PATH.ARTICLES}/${article._id}`, body);
+            response = await fetchApi.put(`${URL_PATH.RECIPES}/${recipe._id}`, body);
         } else {
-            response = await fetchApi.post(URL_PATH.ARTICLES, body);
+            response = await fetchApi.post(URL_PATH.RECIPES, body);
         }
         setSending(false);
-        clearForm();
+        resetForm();
         setOpen(false);
         isEditMode() ? update(response.data) : add(response.data);
     };
 
     const onCloseHandler = () => {
-        clearForm();
+        resetForm();
         setOpen(false);
     };
 
+    const resetForm = () => {
+        isEditMode() ? seedForm() : clearForm();
+    };
+
+    const seedForm = () => {
+        const {title, text, imageUrl} = recipe;
+        setTitle(title);
+        setText(text);
+        setImageUrl(imageUrl || '');
+    };
+
     const clearForm = () => {
-        if (isEditMode()) {
-            const {title, subTitle, text, imageUrl} = article;
-            setTitle(title);
-            setSubTitle(subTitle);
-            setText(text);
-            setImageUrl(imageUrl || '');
-        } else {
-            setTitle('');
-            setSubTitle('');
-            setText('');
-            setImageUrl('');
-        }
+        setTitle('');
+        setText('');
+        setImageUrl('');
     };
 
     return (
         <div className={styles.root}>
             <Button color="primary" variant="contained" onClick={() => setOpen(true)}>
-                {isEditMode() ? 'Edit article' : 'Add new article'}
+                {isEditMode() ? 'Edit recipe' : 'Add new recipe'}
             </Button>
-            <Dialog
-                open={open}
-                onClose={onCloseHandler}
-                aria-labelledby="form-dialog-title"
-                className={styles.dialog}
-            >
+            <Dialog open={open} onClose={onCloseHandler} aria-labelledby="form-dialog-title" className={styles.dialog}>
                 <form onSubmit={onSubmitHandler}>
                     {sending && <Spinner bgColor="#efefefa4" />}
                     <div className={styles.header}>
                         <Typography color="primary" variant="h5" align="center">
-                            {isEditMode() ? 'Edit article' : 'Create new article'}
+                            {isEditMode() ? 'Edit recipe' : 'Create new recipe'}
                         </Typography>
                     </div>
                     <DialogContent className={styles.form}>
@@ -99,34 +90,6 @@ export const ArticleModal = ({article, category, add, update}) => {
                             onChange={e => setTitle(e.target.value)}
                             value={title}
                         />
-                        <TextField
-                            margin="normal"
-                            name="subTitle"
-                            label="Subtitle"
-                            type="text"
-                            fullWidth
-                            required
-                            onChange={e => setSubTitle(e.target.value)}
-                            value={subTitle}
-                        />
-                        {/* {categories && (
-                            <TextField
-                                margin="normal"
-                                name="category"
-                                label="Category"
-                                select
-                                fullWidth
-                                required
-                                onChange={e => setCategory(e.target.value)}
-                                value={category}
-                            >
-                                {categories.map(item => (
-                                    <MenuItem key={item._id} value={item._id}>
-                                        {item.name}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        )} */}
                         <TextField
                             margin="normal"
                             name="text"

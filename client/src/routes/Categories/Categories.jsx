@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
+import React from 'react';
+import {Route} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import Category from '../components/categories/Category';
-import { CategoriesTree, MainHeader } from '../components/shared';
+
+import Category from '../../components/categories/Category';
+import {CategoriesTree, MainHeader} from '../../components/shared';
 import styles from './Categories.module.scss';
 
-const Categories = props => {
-
+const Categories = () => {
     return (
         <div className={styles.root}>
             <Grid container>
@@ -21,7 +21,7 @@ const Categories = props => {
                 </Grid>
             </Grid>
         </div>
-    )
+    );
 };
 
-export default Categories
+export default Categories;

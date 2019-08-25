@@ -1,3 +1,3 @@
-export * from './ArticleModal'
-export * from './CategoryModal'
-export * from './RecipeModal'
+export * from './articles/ArticleModal'
+export * from './categories/CategoryModal'
+export * from './recipes/RecipeModal'

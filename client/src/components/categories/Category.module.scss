@@ -1,5 +1,4 @@
 .root {
-    // padding: 2rem;
     .header{
         padding: 1rem;
         display: flex;
@@ -18,7 +17,6 @@
     }
     .content {
         padding: 1rem;
-
         &__articles,
         &__recipes {
             position: relative;

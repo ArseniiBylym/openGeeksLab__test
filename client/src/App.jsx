@@ -2,24 +2,23 @@ import React, {useEffect, Suspense, lazy} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import {useStoreState, useStoreActions} from 'easy-peasy';
 
-import {Spinner, MainHeader} from './components/shared';
-import Home from './routes/Home'
+import {Spinner} from './components/shared';
+import Home from './routes/Home/Home';
 
-const Categories = lazy(() => import('./routes/Categories'));
-const Article = lazy(() => import('./routes/Article'));
-const Recipe = lazy(() => import('./routes/Recipe'));
-const PageNotFound = lazy(() => import('./routes/PageNotFound'));
-
+const Categories = lazy(() => import('./routes/Categories/Categories'));
+const Article = lazy(() => import('./routes/Article/Article'));
+const Recipe = lazy(() => import('./routes/Recipe/Recipe'));
+const PageNotFound = lazy(() => import('./routes/PageNotFound/PageNotFound'));
 
 function App() {
     const fetchCategories = useStoreActions(state => state.categories.fetchCategories);
-    const categories = useStoreState(state => state.categories.list)
+    const categories = useStoreState(state => state.categories.list);
 
     useEffect(() => {
         fetchCategories();
-    }, [])
+    }, []);
 
-    if (!categories) return <Spinner />
+    if (!categories) return <Spinner />;
     return (
         <div>
             <Router>

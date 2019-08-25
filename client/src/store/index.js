@@ -1,9 +1,9 @@
 import {createStore} from 'easy-peasy';
 
-import {categories} from './categories'
+import {categories} from './categories';
 
 const storeModel = {
-    categories
+    categories,
 };
 
 export const store = createStore(storeModel);

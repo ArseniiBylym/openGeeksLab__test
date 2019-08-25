@@ -5,11 +5,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import styles from './CategoryModal.module.scss';
-import {fetchApi, URL_PATH} from '../../api';
 import Typography from '@material-ui/core/Typography';
-import {Spinner} from '../shared';
 
+import {fetchApi, URL_PATH} from '../../../api';
+import {Spinner} from '../../shared';
+import styles from './CategoryModal.module.scss';
 
 export const CategoryModal = ({category, list, add, update}) => {
     const [open, setOpen] = useState(false);
@@ -18,19 +18,14 @@ export const CategoryModal = ({category, list, add, update}) => {
     const [sending, setSending] = useState(false);
 
     useEffect(() => {
-        isEditMode() && initForm();   
-    }, [category])
+        isEditMode() && seedForm();
+    }, [category]);
 
-    const isEditMode = () => !!category
+    const isEditMode = () => !!category;
 
     const isDisabled = () => {
         return !name;
-    }
-
-    const initForm = () => {
-        setName(category.name);
-        setParent(category.parent || '');
-    }
+    };
 
     const onSubmitHandler = async e => {
         e.preventDefault();
@@ -49,27 +44,30 @@ export const CategoryModal = ({category, list, add, update}) => {
     };
 
     const resetForm = () => {
-        if (isEditMode()) {
-            setName(category.name);
-            setParent(category.parent);
-        } else {
-            setName('');
-            setParent('');
-        }
-    }
+        isEditMode() ? seedForm() : clearForm();
+    };
+
+    const seedForm = () => {
+        setName(category.name);
+        setParent(category.parent || '');
+    };
+
+    const clearForm = () => {
+        setName('');
+        setParent('');
+    };
 
     const onCloseHandler = () => {
         resetForm();
         setOpen(false);
     };
 
-
     return (
         <div className={styles.root}>
-             <Button color='primary' variant='contained' onClick={() => setOpen(true)}>
-                 {isEditMode() ? 'Edit category' : 'Add new category'}
-             </Button>
-             <Dialog
+            <Button color="primary" variant="contained" onClick={() => setOpen(true)}>
+                {isEditMode() ? 'Edit category' : 'Add new category'}
+            </Button>
+            <Dialog
                 open={open}
                 onClose={onCloseHandler}
                 aria-labelledby="form-dialog-title"
@@ -114,23 +112,15 @@ export const CategoryModal = ({category, list, add, update}) => {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button
-                            disabled={isDisabled()}
-                            onClick={onSubmitHandler}
-                            color="primary"
-                        >
+                        <Button disabled={isDisabled()} onClick={onSubmitHandler} color="primary">
                             {isEditMode() ? 'Update' : 'Create'}
                         </Button>
-                        <Button
-                            disabled={sending}
-                            onClick={onCloseHandler}
-                            color="primary"
-                        >
+                        <Button disabled={sending} onClick={onCloseHandler} color="primary">
                             Cancel
                         </Button>
                     </DialogActions>
                 </form>
             </Dialog>
         </div>
-    )
+    );
 };
