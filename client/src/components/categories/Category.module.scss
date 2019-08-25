@@ -1,0 +1,29 @@
+.root {
+    .header{
+        padding: 1rem;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+        &__name {
+            text-transform: capitalize;
+        }
+        .controls {
+            display: flex;
+            &__delete {
+                margin-left: 1rem;
+            }
+        }
+    }
+    .content {
+        padding: 1rem;
+        &__articles,
+        &__recipes {
+            position: relative;
+            min-height: 100px;
+            .empty{
+                margin: 1rem auto;
+            }
+        }
+    }
+}

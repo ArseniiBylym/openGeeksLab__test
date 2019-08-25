@@ -1,0 +1,23 @@
+.root {
+    .content {
+        padding: 2rem;
+        max-width: 900px;
+        margin: auto;
+        .image{
+            display: block;
+            height: 400px;
+            width: 100%;
+            margin: 1rem auto;
+            object-fit: cover;
+        }
+        .text {
+            padding: 1rem 0;
+        }
+        .controls {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    }
+}

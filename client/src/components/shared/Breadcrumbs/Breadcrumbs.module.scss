@@ -1,0 +1,11 @@
+.root {
+    height: 80px;
+    padding: 1rem;
+    position: relative;
+    a {
+        color: gray;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
