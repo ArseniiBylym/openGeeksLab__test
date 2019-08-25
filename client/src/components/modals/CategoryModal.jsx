@@ -24,17 +24,17 @@ export const CategoryModal = ({category, list, add, update}) => {
     const isEditMode = () => !!category
 
     const isDisabled = () => {
-        return !name || !parent;
+        return !name;
     }
 
     const initForm = () => {
         setName(category.name);
-        setParent(category.parent);
+        setParent(category.parent || '');
     }
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {name, parent};
+        const body = {name, parent: parent || null};
         setSending(true);
         let response;
         if (isEditMode()) {
@@ -102,7 +102,6 @@ export const CategoryModal = ({category, list, add, update}) => {
                                 label="Parent category"
                                 select
                                 fullWidth
-                                required
                                 onChange={e => setParent(e.target.value)}
                                 value={parent}
                             >
@@ -116,7 +115,7 @@ export const CategoryModal = ({category, list, add, update}) => {
                     </DialogContent>
                     <DialogActions>
                         <Button
-                            disabled={!name}
+                            disabled={isDisabled()}
                             onClick={onSubmitHandler}
                             color="primary"
                         >

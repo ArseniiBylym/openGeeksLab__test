@@ -16,8 +16,13 @@ const Recipe = props => {
     }, [id]);
 
     const fetchRecipe = async () => {
-        const response = await fetchApi.get(`${URL_PATH.RECIPES}/${id}`);
-        setRecipe(response.data);
+        try {
+            const response = await fetchApi.get(`${URL_PATH.RECIPES}/${id}`);
+            setRecipe(response.data);
+        } catch (error) {
+            console.log(error);
+            props.history.push('/page-not-found')
+        }
     };
 
     const onDeleteHandler = async () => {

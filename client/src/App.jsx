@@ -8,6 +8,7 @@ import Home from './routes/Home'
 const Categories = lazy(() => import('./routes/Categories'));
 const Article = lazy(() => import('./routes/Article'));
 const Recipe = lazy(() => import('./routes/Recipe'));
+const PageNotFound = lazy(() => import('./routes/PageNotFound'));
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
                         <Route path="/categories" component={Categories} />
                         <Route path="/articles/:id" component={Article} />
                         <Route path="/recipes/:id" component={Recipe} />
-                        <Redirect from="/*" to="/" />
+                        <Route path="/page-not-found" component={PageNotFound} />
+                        <Redirect from="/*" to="/page-not-found" />
                     </Switch>
                 </Suspense>
             </Router>

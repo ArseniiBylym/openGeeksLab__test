@@ -32,13 +32,21 @@ const Category = props => {
     }, [id]);
 
     const fetchArticles = async () => {
-        const response = await fetchApi.get(`${URL_PATH.ARTICLES}?category=${id}`);
-        setArticles(response.data);
+        try {
+            const response = await fetchApi.get(`${URL_PATH.ARTICLES}?category=${id}`);
+            setArticles(response.data);
+        } catch (error) {
+            props.history.push('/page-not-found')
+        }
     };
 
     const fetchRecipes = async () => {
-        const response = await fetchApi.get(`${URL_PATH.RECIPES}?category=${id}`);
-        setRecipes(response.data);
+        try {
+            const response = await fetchApi.get(`${URL_PATH.RECIPES}?category=${id}`);
+            setRecipes(response.data);
+        } catch (error) {
+            props.history.push('/page-not-found')
+        }
     };
 
     const onDeleteHandler = async () => {

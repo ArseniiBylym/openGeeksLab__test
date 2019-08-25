@@ -23,7 +23,7 @@ export const ArticleModal = ({article, category, add, update}) => {
             setTitle(title);
             setSubTitle(subTitle);
             setText(text);
-            setImageUrl(imageUrl);
+            setImageUrl(imageUrl || '');
         }
     }, [])
 
@@ -60,7 +60,7 @@ export const ArticleModal = ({article, category, add, update}) => {
             setTitle(title);
             setSubTitle(subTitle);
             setText(text);
-            setImageUrl(imageUrl);
+            setImageUrl(imageUrl || '');
         } else {
             setTitle('');
             setSubTitle('');

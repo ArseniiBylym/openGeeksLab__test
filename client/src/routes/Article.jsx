@@ -16,8 +16,13 @@ const Article = props => {
     }, [id]);
 
     const fetchArticle = async () => {
-        const response = await fetchApi.get(`${URL_PATH.ARTICLES}/${id}`);
-        setArticle(response.data);
+        try {
+            const response = await fetchApi.get(`${URL_PATH.ARTICLES}/${id}`);
+            setArticle(response.data);
+        } catch (error) {
+            console.log(error);
+            props.history.push('/page-not-found')
+        }
     };
     
     const onDeleteHandler = async () => {

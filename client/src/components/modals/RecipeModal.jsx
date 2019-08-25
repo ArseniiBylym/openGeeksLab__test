@@ -21,7 +21,7 @@ export const RecipeModal = ({recipe, category, add, update}) => {
             const {title, text, imageUrl} = recipe;
             setTitle(title);
             setText(text);
-            setImageUrl(imageUrl);
+            setImageUrl(imageUrl || '');
         }
     }, [])
 
@@ -57,7 +57,7 @@ export const RecipeModal = ({recipe, category, add, update}) => {
             const {title, text, imageUrl} = recipe;
             setTitle(title);
             setText(text);
-            setImageUrl(imageUrl);
+            setImageUrl(imageUrl || '');
         } else {
             setTitle('');
             setText('');
