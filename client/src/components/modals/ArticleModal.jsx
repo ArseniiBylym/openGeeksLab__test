@@ -35,8 +35,8 @@ export const ArticleModal = ({article, category, add, update}) => {
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {title, subTitle, text, category, imageUrl};
-        if (!imageUrl) delete body.imageUrl;
+        const body = {title, subTitle, text, category, imageUrl: imageUrl || null};
+        // if (!imageUrl) delete body.imageUrl;
         setSending(true);
         let response;
         if (isEditMode()) {

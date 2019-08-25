@@ -35,7 +35,7 @@ export const BreadcrumbsContainer = ({type, id}) => {
 
     return (
         <div className={styles.root}>
-            {parents ? createBreadcrumbs() : <Spinner />}
+            {parents ? createBreadcrumbs() : null}
         </div>
     )
 };

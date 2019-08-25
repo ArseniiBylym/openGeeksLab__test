@@ -3,7 +3,7 @@ import styles from './Article.module.scss';
 import {fetchApi, URL_PATH} from '../api';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import {Spinner, MainHeader} from '../components/shared';
+import {Spinner, MainHeader, BreadcrumbsContainer} from '../components/shared';
 import {ArticleModal} from '../components/modals';
 import defaultImage from '../assets/images/article.jpg';
 
@@ -37,6 +37,7 @@ const Article = props => {
         <div className={styles.root}>
             <MainHeader />
             <div className={styles.content}>
+                <BreadcrumbsContainer type='articles' id={article._id}/>
                 <Typography variant="h3" align="center" gutterBottom>
                     {article.title}
                 </Typography>
