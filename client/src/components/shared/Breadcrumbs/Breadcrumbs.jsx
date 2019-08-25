@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './Breadcrumbs.module.scss';
+import {useStoreState, useStoreActions} from 'easy-peasy';
 import {Link} from 'react-router-dom';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import {fetchApi, URL_PATH} from '../../../api'
@@ -8,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 
 export const BreadcrumbsContainer = ({type, id}) => {
     const [parents, setParents] = useState(null);
+    const breadcrumbsUpdateTrigger = useStoreState(store => store.categories.breadcrumbsUpdateTrigger);
 
     useEffect(() => {
         getParents(id)
-    }, [id])
+    }, [id, breadcrumbsUpdateTrigger])
 
     const getParents = async id => {
         const parents = await fetchApi.get(`/api/${type}/${id}?getParents=true`);

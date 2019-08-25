@@ -24,6 +24,7 @@ const Category = props => {
     const category = useStoreState(state => state.categories.list.find(item => item._id === id));
     const updateCategory = useStoreActions(state => state.categories.updateCategory)
     const deleteCategory = useStoreActions(state => state.categories.deleteCategory)
+    const updateBreadcrumbs = useStoreActions(state => state.categories.runBreadcrumbsUpdateTrigger)
 
     useEffect(() => {
         fetchArticles();
@@ -64,6 +65,7 @@ const Category = props => {
 
     const onUpdateCategoryHandler = (updatedCategory) => {
         updateCategory(updatedCategory);
+        updateBreadcrumbs();
     } 
 
     const getArticles = () => {

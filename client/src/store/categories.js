@@ -34,5 +34,10 @@ export const categories = {
     tree: computed(state => {
         if (!state.list) return null;
         return listToTree(state.list)
+    }),
+    breadcrumbsUpdateTrigger: false,
+    runBreadcrumbsUpdateTrigger: action((state, payload) => {
+        state.breadcrumbsUpdateTrigger = !state.breadcrumbsUpdateTrigger;
     })
+
 };
