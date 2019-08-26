@@ -1,4 +1,6 @@
 const Category = require('../modles/Category.model');
+const Article = require('../modles/Article.model');
+const Recipe = require('../modles/Recipe.model');
 const {validationResult} = require('express-validator');
 const getParentCategories = require('../utils/helpers/getParentCategories');
 
@@ -64,6 +66,15 @@ exports.update = async (req, res, next) => {
 exports.delete = async (req, res, next) => {
     try {
         const {id} = req.params;
+        const category = await Category.findById(id).exec();
+        await Category.updateMany({parent: category._id}, {parent: category.parent || null})
+        if (category.parent) {
+            await Article.updateMany({category: category._id}, {category: category.parent})
+            await Recipe.updateMany({category: category._id}, {category: category.parent})
+        } else {
+            await Article.deleteMany({category: category._id});
+            await Recipe.deleteMany({category: category._id});
+        }
         await Category.findByIdAndDelete(id);
         return res.status(201).json(id);
     } catch (error) {

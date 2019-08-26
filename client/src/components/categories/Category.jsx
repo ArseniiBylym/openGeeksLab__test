@@ -58,7 +58,7 @@ const Category = props => {
             if (category.parent) {
                 props.history.push(`/categories/${category.parent}`);
             } else {
-                props.history.push('/');
+                props.history.push('/categories');
             }
         } catch (error) {
             console.log(error);

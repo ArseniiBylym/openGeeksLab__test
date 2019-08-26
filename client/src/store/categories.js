@@ -18,7 +18,18 @@ export const categories = {
         });
     }),
     deleteCategory: action((state, payload) => {
-        state.list = state.list.filter(item => item._id !== payload._id);
+        state.list = state.list
+            .filter(item => item._id !== payload._id)
+            .map(item => {
+                if (item.parent === payload._id) {
+                    return {
+                        ...item,
+                        parent: payload.parent
+                    }
+                }
+                return item;
+            });
+        
     }),
     error: false,
     setError: action((state, payload) => {
