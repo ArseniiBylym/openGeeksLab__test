@@ -24,12 +24,17 @@ export const RecipeModal = ({recipe, category, add, update}) => {
     const isEditMode = () => !!recipe;
 
     const isDisabled = () => {
-        return !title || !text || sending;
+        return !title.trim() || !text.trim() || sending;
     };
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {title, text, category, imageUrl: imageUrl || null};
+        const body = {
+            title: title.trim(), 
+            text: text.trim(), 
+            category, 
+            imageUrl: imageUrl.trim() || null
+        };
         setSending(true);
         let response;
         if (isEditMode()) {

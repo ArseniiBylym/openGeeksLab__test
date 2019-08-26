@@ -24,12 +24,14 @@ export const CategoryModal = ({category, list, add, update}) => {
     const isEditMode = () => !!category;
 
     const isDisabled = () => {
-        return !name;
+        return !name.trim();
     };
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {name, parent: parent || null};
+        const body = {
+            name: name.trim(), 
+            parent: parent || null};
         setSending(true);
         let response;
         if (isEditMode()) {

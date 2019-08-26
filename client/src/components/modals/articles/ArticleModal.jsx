@@ -25,12 +25,18 @@ export const ArticleModal = ({article, category, add, update}) => {
     const isEditMode = () => !!article;
 
     const isDisabled = () => {
-        return !title || !subTitle || !text || sending;
+        return !title.trim() || !subTitle.trim() || !text.trim() || sending;
     };
 
     const onSubmitHandler = async e => {
         e.preventDefault();
-        const body = {title, subTitle, text, category, imageUrl: imageUrl || null};
+        const body = {
+            title: title.trim(),
+            subTitle: subTitle.trim(),
+            text: text.trim(), 
+            category, 
+            imageUrl: imageUrl.trim() || null
+        };
         setSending(true);
         let response;
         if (isEditMode()) {
