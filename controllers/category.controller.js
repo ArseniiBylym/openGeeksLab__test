@@ -3,12 +3,17 @@ const Article = require('../modles/Article.model');
 const Recipe = require('../modles/Recipe.model');
 const {validationResult} = require('express-validator');
 const getParentCategories = require('../utils/helpers/getParentCategories');
+const {clearCache} = require('../utils/cache');
 
 exports.getAll = async (req, res, next) => {
     try {
-        const categories = await Category.find().exec();
+        const categories = await Category.find().cache({
+            key: 'allCategories',
+            time: 10 * 60
+        });
         return res.status(200).json(categories);
     } catch (error) {
+        console.log(error)
         return res.status(404).json('Categories not found')
     }
 }
@@ -39,6 +44,7 @@ exports.add = async (req, res, next) => {
     }
     try {
         const category = await new Category({...req.body}).save();
+        clearCache('allCategories');
         return res.status(201).json(category);
     } catch (error) {
         next(error)
@@ -57,6 +63,7 @@ exports.update = async (req, res, next) => {
             {$set: {...req.body}},
             {new: true}
         );
+        clearCache('allCategories');
         return res.status(201).json(category);
     } catch (error) {
         next(error)
@@ -76,6 +83,7 @@ exports.delete = async (req, res, next) => {
             await Recipe.deleteMany({category: category._id});
         }
         await Category.findByIdAndDelete(id);
+        clearCache('allCategories');
         return res.status(201).json(id);
     } catch (error) {
         next(error)

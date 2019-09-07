@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config();
+require('./utils/cache');
 
 const MONGO_DB_URI = process.env.MONGO_DB_URI;
 const PORT = process.env.PORT || 5000;

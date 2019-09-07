@@ -18,10 +18,17 @@ MERN stack app for read, create, update and delete recipes and articles by relat
 > cd ..
 
 3. Rename .expample.env file to .env in the root directory
-4. Run concurrently dev node server and Create-React-App server
+4. (optional) Run app with [redis](https://redis.io/) caching
+    1. Checkout to "redis" branch
+    >   git checkout redis
+    >
+    >   npm install
+
+    2. Install and run [redis](https://redis.io/)
+5. Run concurrently dev node server and Create-React-App server
 > npm run dev
 
-5. Open browser on localhost:3000
+6. Open browser on localhost:3000
 
 ### Get api documentation
 

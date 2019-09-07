@@ -2,12 +2,16 @@ const Recipe = require('../modles/Recipe.model');
 const Category = require('../modles/Category.model');
 const {validationResult} = require('express-validator');
 const getParentCategories = require('../utils/helpers/getParentCategories');
+const {clearCache} = require('../utils/cache');
 
 exports.getAll = async (req, res, next) => {
     const {category} = req.query;
     const searchParam = category ? {category} : null;
     try {
-        const recipes = await Recipe.find(searchParam).exec();
+        const recipes = await Recipe.find(searchParam).cache({
+            key: `recipes:${category}` || 'allRecipes',
+            time: 10 * 60
+        });
         return res.status(200).json(recipes);
     } catch (error) {
         return res.status(404).json('Recipes not found')
@@ -43,6 +47,7 @@ exports.add = async (req, res, next) => {
     }
     try {
         const recipe = await new Recipe({...req.body}).save();
+        clearCache(`recipes:${req.body.category}`);
         return res.status(201).json(recipe);
     } catch (error) {
         next(error)
@@ -61,6 +66,7 @@ exports.update = async (req, res, next) => {
             {$set: {...req.body}},
             {new: true}
         ).exec();
+        clearCache(`recipes:${req.body.category}`);
         return res.status(201).json(recipe);
     } catch (error) {
         next(error)
@@ -71,6 +77,7 @@ exports.delete = async (req, res, next) => {
     try {
         const {id} = req.params;
         await Recipe.findByIdAndDelete(id).exec();
+        clearCache(`recipes:${req.body.category}`);
         return res.status(201).json(id);
     } catch (error) {
         next(error)

@@ -2,12 +2,16 @@ const Article = require('../modles/Article.model');
 const Category = require('../modles/Category.model');
 const {validationResult} = require('express-validator');
 const getParentCategories = require('../utils/helpers/getParentCategories');
+const {clearCache} = require('../utils/cache');
 
 exports.getAll = async (req, res, next) => {
     const {category} = req.query;
     const searchParam = category ? {category} : null;
     try {
-        articles = await Article.find(searchParam).exec();
+        articles = await Article.find(searchParam).cache({
+            key: `articles:${category}` || 'allArticles',
+            time: 10 * 60
+        });
         return res.status(200).json(articles);
     } catch (error) {
         return res.status(404).json('Articles not found')
@@ -43,6 +47,7 @@ exports.add = async (req, res, next) => {
     }
     try {
         const article = await new Article({...req.body}).save();
+        clearCache(`articles:${req.body.category}`);
         return res.status(201).json(article);
     } catch (error) {
         next(error)
@@ -61,6 +66,7 @@ exports.update = async (req, res, next) => {
             {$set: {...req.body}},
             {new: true}
         ).exec();
+        clearCache(`articles:${req.body.category}`);
         return res.status(201).json(article);
     } catch (error) {
         next(error)
@@ -71,6 +77,7 @@ exports.delete = async (req, res, next) => {
     try {
         const {id} = req.params;
         await Article.findByIdAndDelete(id).exec();
+        clearCache(`articles:${req.body.category}`);
         return res.status(201).json(id);
     } catch (error) {
         next(error)
