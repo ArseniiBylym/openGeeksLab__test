@@ -3,6 +3,15 @@ MERN stack app for read, create, update and delete recipes and articles by relat
 
 [Live demo](https://opengeeks.herokuapp.com/)
 
+### Run project locally with Docker
+1. Install [docker](https://docs.docker.com/install) and [docker-compose](https://docs.docker.com/compose/install), if they already not instaled
+2. Create new file config/keys/keys.dev.js and copy content from config/keys/example.keys.dev.js 
+> cp config/keys/exmaple.keys.dev.js config/keys/keys.dev.js
+3. Run from root folder 
+> docker-compose up
+4. Open browser on localhost:3000 
+
+
 ### Run project locally
 1. Clone the repository
 > git clone https://github.com/ArseniiBylym/productCategories__test.git
@@ -17,14 +26,11 @@ MERN stack app for read, create, update and delete recipes and articles by relat
 >
 > cd ..
 
-3. Rename .expample.env file to .env in the root directory
-4. (optional) Run app with [redis](https://redis.io/) caching
-    1. Checkout to "redis" branch
-    >   git checkout redis
-    >
-    >   npm install
+3. Create new file config/keys/keys.dev.js and copy content from config/keys/example.keys.dev.js 
+> cp config/keys/exmaple.keys.dev.js config/keys/keys.dev.js
 
-    2. Install and run [redis](https://redis.io/)
+4. (optional) Fill config/keys/keys.dev.js with your own values
+    
 5. Run concurrently dev node server and Create-React-App server
 > npm run dev
 

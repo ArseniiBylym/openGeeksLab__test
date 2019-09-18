@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
-require('dotenv').config();
 
-const MONGO_DB_URI = process.env.MONGO_DB_URI;
+const KEYS = require('./config/keys')
+const MONGO_DB_URI = KEYS.MONGO_DB_URI;
 const PORT = process.env.PORT || 5000;
 const app = express();
 
