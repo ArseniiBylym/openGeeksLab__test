@@ -1,13 +1,13 @@
-## Eat and Read (openGeeksLab test)
+## Eat and Read (product list tree app)
 MERN stack app for read, create, update and delete recipes and articles by related categories
 
 [Live demo](https://opengeeks.herokuapp.com/)
 
 ### Run project locally
 1. Clone the repository
-> git clone https://github.com/ArseniiBylym/openGeeksLab__test.git
+> git clone https://github.com/ArseniiBylym/productCategories__test.git
 >
-> cd openGeeksLab__test
+> cd productCategories__test
 2. Install project dependencies
 > npm install
 >
